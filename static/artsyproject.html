@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Artist Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/mystyle.css">
+<script type="text/javascript" src="/static/js/artsyproject.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+   <!--Top Artist Search-->
+   <div id="top-container-style">
+      <p id="top-text-style">Artist Search</p>
+   </div>
+
+   <!--Search Bar-->
+   <div id="search-bar-container-style">
+      <form id="search-Bar" onsubmit="return false">
+         <button type="submit" id="submitButton">
+            <img name="search-icon" src="/static/images/search_icon.png">
+         </button>
+         <input type="search" id="userInput" placeholder="Please enter an artist name." required>
+         <button type="reset" id="clearButton">
+            <img name="clear-icon" src="/static/images/clear_icon.png">
+         </button>
+      </form>
+   </div>
+
+   <!--Loading first position-->
+   <div id="first-loading" class="hideit">
+      <img class="loading" src="/static/images/loading.gif">
+   </div>
+
+   <!--No result Div-->
+   <div id="no-result-container" class="hideit">
+      <p id="no-result-style">No results found.</p>
+   </div>
+
+   <!--Result Div-->
+   <div id="artist-bar" class="hideit">
+   </div>
+
+   <!--Loading second position-->
+   <div id="second-loading" class="hideit">
+      <img class="loading" src="/static/images/loading.gif">
+   </div>
+
+   <!--Biography Div-->
+   <div id="artist-biography-container" class="hideit">
+   </div>
+
+   <!--Bottom Artsy Icon and link-->   
+   <div id="bottom-container-style">
+      <a id="power-style" href="https://www.artsy.net/">Powered by</a>
+      <a href="https://www.artsy.net/">
+         <img id="logo-style" src="/static/images/artsy_logo.svg">
+      </a>
+      <a id="artsy-style" href="https://www.artsy.net/">Artsy.</a>
+   </div>
+
+   <!-- Below are the scripts used for the on click event for the search bar
+        and when user click on certain artist for more information -->
+   <script>
+      // This is the on click function of the search button:
+      $("#submitButton").click(function() {
+         let userInput = document.querySelector("#userInput").value;
+         if (userInput != "") {
+            // Send the request:
+            $.ajax({
+               beforeSend: function() {
+                  // First show the proper loading sign:
+                  hideDiv("#artist-biography-container");
+                  hideDiv("#no-result-container");
+                  // show the loading icon at the proper location:
+                  if ($("#artist-bar").css("visibility") == "hidden") {
+                     // only show the loading sign below the search bar
+                     // when the artist bar is not there
+                     showDiv("#first-loading");
+                     hideDiv("#second-loading");
+                     hideDiv("#artist-bar"); 
+                  } else {
+                     // only show the loading sign below the artist bar
+                     // when the artist bar is there already
+                     hideDiv("#first-loading");
+                     showDiv("#second-loading");
+                     showDiv("#artist-bar");
+                  }
+               },
+               type: "GET",
+               url: "/centaurus/search_info/" + userInput,
+               cache: false, 
+               success: function(result) {
+                  hideDiv("#artist-biography-container");
+                  addArtist(result);
+               }
+            })
+         }
+      });
+
+      // This is the on click function when an artist is clicked:
+      $(document).on('click', 'form[class="artist"]', function() {
+         // Get id of that form:
+         var formID = $(this).attr('id');
+         // change the color of this form:
+         $(".artist").removeClass('artist-click-effect');
+         $("#" +formID).addClass('artist-click-effect');
+         // Send request:
+         $.ajax({
+            beforeSend: function() {
+               // Hide the top loading, previous biography, and no result container:
+               hideDiv("#artist-biography-container");
+               hideDiv("#first-loading");
+               hideDiv("#no-result-container");
+               if ($("#artist-bar").css("visibility") == "hidden") {
+                  // At the beginning stage, nothing is shown:
+                  hideDiv("#artist-bar");
+                  hideDiv("#second-loading");
+               } else {
+                  // Show the artist bar and second loading gif:
+                  showDiv("#artist-bar");
+                  showDiv("#second-loading");
+               }
+            },
+            type: "GET",
+            url: "/centaurus/search_bio/" + formID, 
+            cache: false, 
+            success: function(result) {
+               // Hide loading gif, and keep the artist bar:
+               hideDiv("#no-result-container");
+               hideDiv("#first-loading");
+               showDiv("#artist-bar");
+               // Then add the biography of that artist:
+               addBio(result);   
+            } 
+         })
+      });
+   </script>
+</body>
+</html>

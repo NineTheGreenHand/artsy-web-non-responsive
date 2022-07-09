@@ -1,0 +1,227 @@
+/*Style for the top header part*/
+#top-container-style {
+   position: fixed;
+   background-color: #efefef;
+   height: 40px;
+   margin: -8px;
+   width: 100%;
+   padding-bottom: 10px;
+   top: 0;
+   z-index: 1;
+}
+#top-text-style {
+   position: relative;
+   font-family: Arial;
+   font-size: 19.5px;
+   left: 4.5px;
+}
+
+/*Style for the search bar*/
+#search-bar-container-style {
+   position: relative;
+   text-align: center;
+   top: 70px;
+   padding: 1px;
+   width: 1000px;
+   margin: 0 auto;
+}
+input[id="userInput"] {
+   background: transparent;
+   border: 1.5px solid rgb(152, 150, 150);
+   padding-left: 30px;
+   padding-right: 30px;
+   font-family: Arial;
+   height: 30px;
+   width: 500px;
+   border-radius: 17px;
+}
+input[id="userInput"]::selection {
+   background:rgb(255, 119, 0);
+}
+input[id="userInput"]::placeholder {
+   position: relative;
+   color: rgb(152, 150, 150);
+   font-family: Arial;
+}
+input[id="userInput"]:focus {
+   outline: none;
+   border: 2px solid rgb(255, 136, 0);
+}
+/*Remove the default clear icon*/
+input[id="userInput"]::-webkit-search-cancel-button {
+   display: none;
+}
+button[id="submitButton"] {
+   position: relative;
+   left: 35px;
+   top: 3px;
+   background: transparent;
+   border: none;
+}
+button[id="clearButton"] { 
+   position: relative;
+   left: -35px;
+   top: 2.5px;
+   background: transparent;
+   border: none;
+}
+img[name="search-icon"] {
+   width: 17px;
+   height: 17px;
+   opacity: 0.5;
+   cursor: pointer;
+}
+img[name="clear-icon"] {
+   width: 13px;
+   height: 13px;
+   opacity: 0.5;
+   cursor: pointer;
+}
+img[name="search-icon"]:hover,
+img[name="clear-icon"]:hover {
+   opacity: 1.0;
+}
+
+/*No result div style*/
+#no-result-container {
+   position: relative;
+   text-align: center;
+   margin: 0 auto;
+   background-color: rgb(210, 209, 209);
+   height: 50px;
+   width: 530px;
+   top: 45px;
+   border-radius: 15px;
+}
+#no-result-style {
+   position: relative;
+   top: 15px;
+   font-family: Arial;
+   font-size: 16px;
+}
+
+/*Two loading gif style*/
+#first-loading {
+   position: relative;
+   text-align: center;
+   top: 70px;
+   width: 100%;
+}
+#second-loading {
+   position: relative;
+   text-align: center;
+   top: 10px;
+   width: 100%;
+}
+.loading {
+   width: 50px;
+   background: none;
+}
+
+/*Artist horizontal bar style*/
+#artist-bar {
+   position: relative;
+   display: flex;
+   flex-wrap: nowrap;
+   margin: 0 auto;
+   overflow-x: scroll;
+   overflow-y: hidden;
+   text-align: center;
+   width: 1041px; 
+   top: 1px;
+   height: auto;
+}
+.artist {
+   position: relative;
+   flex: 0 0 auto;
+   color: white;
+   background-color: #205375;
+   padding: 14px;
+   border: solid 2px;
+   width: 200px;
+   font-family: Arial;
+   cursor: pointer;
+   word-wrap: break-word;
+   font-size: 20px;
+}
+.artist:hover {
+   background-color: #112B3C;
+   cursor: pointer;
+}
+.artist-click-effect {
+   background-color: #112B3C;
+}
+#artist-pic {
+   position: relative;
+   left: -5px;
+   width: 200px;
+   height: 200px;
+   border-radius: 50%;
+   border: solid 5px;  
+   cursor: pointer;
+}
+
+/*Artist biography style*/
+#artist-biography-container {
+   position: relative;
+   width: 800px;
+   font-family: Arial;
+   margin: 0 auto;
+}
+#bio-firstPart {
+   position: relative;
+   top: -65px;
+   font-size: 21px;
+   text-align: center;
+}
+#bio-nationality {
+   position: relative;
+   top: -121px;
+   font-size: 16px;
+   text-align: center;  
+}
+#bio-bio {
+   position: relative;
+   top: -170px;
+   font-size: 14.2px;
+   text-align: justify;
+}
+
+/*Style for the bottom Artsy logo*/
+#bottom-container-style {
+   position: fixed;
+   color: white;
+   font-family: Arial;
+   text-align: center;
+   font-size: 15px;
+   bottom: 0;
+   height: 30px;
+   margin: -8px;
+   padding-bottom: 10px;
+   width: 100%;
+   background-color: #112B3C;
+}
+#power-style {
+   position: relative;
+   color: white;
+   text-decoration: none;
+   cursor: pointer;
+}
+#logo-style {
+   position: relative;
+   width: 20px;
+   height: 20px;
+   top: 5px;
+   cursor: pointer;
+}
+#artsy-style {
+   position: relative;
+   color: white;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+/* Hidden class */
+.hideit {
+   visibility: hidden;
+}
